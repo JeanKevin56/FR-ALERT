@@ -1,7 +1,6 @@
 import requests
 import pandas as pd
 
-cve_id = "CVE-2023-24488"
 def get_cve_scores(cve_id):
     url = f"https://cveawg.mitre.org/api/cve/{cve_id}"
     response = requests.get(url)
