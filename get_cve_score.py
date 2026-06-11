@@ -1,6 +1,7 @@
 import requests
-import numpy as np
+import pandas as pd
 
+cve_id = "CVE-2023-24488"
 def get_cve_scores(cve_id):
     url = f"https://cveawg.mitre.org/api/cve/{cve_id}"
     response = requests.get(url)
@@ -27,6 +28,7 @@ def get_cve_scores(cve_id):
         vendor = product["vendor"]
         product_name = product["product"]
         versions = [v["version"] for v in product["versions"] if v["status"] == "affected"]
+        print(product)
         #print(f"Éditeur : {vendor}, Produit : {product_name}, Versions : {', '.join(versions)}")
     # Afficher les résultats
     #print(f"CVE : {cve_id}")
@@ -47,7 +49,7 @@ def get_cve_scores(cve_id):
     else:
         #print(f"Aucun score EPSS trouvé pour {cve_id}")
         pass
-    all_score = np.array([("CVE", cve_id), ("EPSS", epss_score), ("CVSS", cvss_score), ("CWE", cwe)], dtype=object)
+    all_score = pd.DataFrame([{"CVE": cve_id, "EPSS": epss_score, "CVSS": cvss_score, "CWE": cwe, "Produit" : product["product"], "CWE Description": cwe_desc, "Version" : versions}])
     #print("All Scores:")
     #print(all_score)
     return all_score
