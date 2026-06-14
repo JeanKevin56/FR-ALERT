@@ -85,19 +85,19 @@ def consolider_en_dataframe(donnees_globales, nom_fichier_csv="donnees_enrichies
                 versions         = produit.get("versions", "Non renseigné")
                 ligne = {
                     "ID ANSSI":            id_anssi,
-                    "Titre ANSSI":         titre_anssi,
-                    "Type":                type_bulletin,
+                    "Titre ANSSI":         titre_anssi.replace("\n", " "),
+                    "Type":                type_bulletin.replace("\n", " "),
                     "Date de publication": date_pub,
                     "Lien":                lien_bulletin,
-                    "Identifiant CVE":     identifiant_cve,
+                    "Identifiant CVE":     identifiant_cve.replace("\n", " "),
                     "Score CVSS":          score_cvss,
                     "Base Severity":       base_severity,
-                    "Type CWE":            type_cwe,
+                    "Type CWE":            type_cwe.replace("\n", " "),
                     "Score EPSS":          score_epss,
-                    "Description":         description,
-                    "Éditeur (Vendor)":    editeur,
-                    "Produit":             nom_produit,
-                    "Versions affectées":  versions,
+                    "Description":         description.replace("\n", " "),
+                    "Éditeur (Vendor)":    editeur.replace("\n", " "),
+                    "Produit":             nom_produit.replace("\n", " "),
+                    "Versions affectées":  versions.replace("\n", " "),
                 }
                 lignes_aplaties.append(ligne)
 
