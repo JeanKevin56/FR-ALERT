@@ -2,32 +2,16 @@ import pandas as pd
 from cve_extraction import extraire_cves
 from get_cve_score import get_cve_scores
 from dataframe import consolider_en_dataframe
+from get_bulletin import get_bulletin
 
+FEED_ALERTES = "https://www.cert.ssi.gouv.fr/alerte/feed/"
+FEED_AVIS    = "https://www.cert.ssi.gouv.fr/avis/feed/"
 
 def executer_pipeline():
     print("=== DÉMARRAGE DU PIPELINE ANSSI ===\n")
 
-    bulletins_a_traiter = [
-        {
-            "id": "CERTFR-2024-ALE-001",
-            "titre": "Multiples vulnérabilités dans Ivanti",
-            "type": "alerte",
-            "date_publication": "2024-01-11",
-            "lien": "https://www.cert.ssi.gouv.fr/alerte/CERTFR-2024-ALE-001/",
-            "mode": "remote",
-            "dossier": "alertes"
-        },
-        {
-            "id": "CERTFR-2024-AVI-001",
-            "titre": "Avis de sécurité Microsoft",
-            "type": "avis",
-            "date_publication": "2024-01-02",
-            "lien": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2024-AVI-001/",
-            "mode": "remote",
-            "dossier": "avis"
-        }
-    ]
-
+    bulletins_a_traiter = get_bulletin(FEED_ALERTES) + get_bulletin(FEED_AVIS)
+    print(f"Nombre de bulletins à traiter : {len(bulletins_a_traiter)}")
     donnees_globales = []
 
     for b_info in bulletins_a_traiter:
@@ -68,5 +52,3 @@ def executer_pipeline():
 
 if __name__ == "__main__":
     executer_pipeline()
-
-    print("Hello World!")
