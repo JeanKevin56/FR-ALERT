@@ -28,10 +28,8 @@ l'analyse, les visualisations (partie 5) et les modèles de Machine Learning
 Python 3.11 recommandé. Installer les dépendances :
 
 ```bash
-pip install feedparser requests pandas
+pip install feedparser requests pandas matplotlib seaborn scikit-learn
 ```
-
-(Le notebook utilise en plus `matplotlib`, `seaborn` et `scikit-learn`.)
 
 ## Utilisation
 
@@ -54,10 +52,10 @@ Dans `main.py`, la variable `MODE` contrôle la source :
 
 ### Cache des appels API
 
-Pour respecter les serveurs externes, une pause de 2 secondes est imposée
-avant chaque requête. Un cache disque (`cache_cve.json`) mémorise
-les CVE déjà interrogés : les exécutions suivantes ne refont aucun appel réseau
-pour un CVE connu, y compris entre deux session (si l'application est fermée par ex)
+Pour respecter les serveurs externes, on applique une pause de 2 secondes entre chaque requête.
+Un cache disque (`cache_cve.json`) mémoriseles CVE déjà interrogés : les exécutions suivantes
+ne refont aucun appel réseau pour un CVE connu, y compris entre deux session 
+(si l'application est fermée par ex)
 
 ## Enrichissement : les scores utilisés
 
